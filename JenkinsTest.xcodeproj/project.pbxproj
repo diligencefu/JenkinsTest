@@ -48,7 +48,6 @@
 				2CB9BB3F32336FDFDD0A8459 /* Pods-JenkinsTest.debug.xcconfig */,
 				28293FA7F41AB2E8A962777D /* Pods-JenkinsTest.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -370,7 +369,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.JenkinsTest.test.JenkinsTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JenkinsTest.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -399,7 +398,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.JenkinsTest.test.JenkinsTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JenkinsTest.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
