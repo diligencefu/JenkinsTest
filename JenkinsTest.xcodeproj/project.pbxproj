@@ -359,6 +359,7 @@
 				DEVELOPMENT_TEAM = F22YRQ2QK9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JenkinsTest/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = JenkinsTest;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -388,6 +389,7 @@
 				DEVELOPMENT_TEAM = F22YRQ2QK9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JenkinsTest/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = JenkinsTest;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
