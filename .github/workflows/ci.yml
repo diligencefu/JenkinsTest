@@ -17,9 +17,11 @@ jobs:
 #        with:
 #          xcode-version: 12.x
 
-#      - name: Install dependencies
-#        run: |
-#          # 安装依赖项的命令
+      - name: Install dependencies
+        run: |
+          cd ${WORKSPACE}/dealers
+          /usr/local/bin/pod install
+
 
       - name: Build and Archive
         run: |
