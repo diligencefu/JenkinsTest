@@ -18,7 +18,7 @@ jobs:
 
       - name: Build and Archive
         run: |
-          xcodebuild archive -scheme JenkinsTest -archivePath JenkinsTest.xcarchive
+            xcodebuild -workspace JenkinsTest.xcworkspace -scheme JenkinsTest -sdk iphoneos archive -archivePath JenkinsTest.xcarchive
 
       - name: Export Archive
         run: |
