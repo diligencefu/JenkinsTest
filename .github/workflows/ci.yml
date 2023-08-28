@@ -19,7 +19,7 @@ jobs:
       - name: Set Xcode signing
         run: |
           # 配置 Xcode 项目的签名
-          xcodebuild -project JenkinsTest.xcodeproj -scheme JenkinsTest CODE_SIGN_STYLE="Automatic" CODE_SIGN_IDENTITY="Apple Development: Yaohui Fu (ZAN29V44ST)" PROVISIONING_PROFILE_SPECIFIER="Xcode Managed Profile"
+          xcodebuild -project JenkinsTest.xcodeproj -scheme JenkinsTest CODE_SIGN_STYLE="Automatic" CODE_SIGN_IDENTITY="Apple Development: Yaohui Fu (ZAN29V44ST)"
           
       - name: Build and Archive
         run: |
