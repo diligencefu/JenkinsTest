@@ -1,5 +1,4 @@
-name: iOS Build and Upload
-
+name: Build and Submit to App Store
 on:
   push:
     branches:
@@ -10,30 +9,51 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-#    - name: Set up Xcode
-#      uses: actions/setup-xcode@v2
-#      with:
-#        xcode-version: '14.3.1'
+#      - name: Set up Xcode
+#        uses: actions/setup-xcode@v2
+#        with:
+#          xcode-version: 12.x
 
-    - name: Install dependencies
-      run: |
-        cd /Users/fuyaohui/Desktop/JenkinsTest
-        pod install
+#      - name: Install dependencies
+#        run: |
+#          # 安装依赖项的命令
 
-    - name: Build and Archive
-      run: |
-        cd /Users/fuyaohui/Desktop/JenkinsTest
-        xcodebuild clean archive -scheme JenkinsTest -archivePath "build/JenkinsTest.xcarchive"
+      - name: Build and Archive
+        run: |
+          xcodebuild archive -scheme JenkinsTest -archivePath JenkinsTest.xcarchive
 
-    - name: Export IPA
-      run: |
-        cd /Users/fuyaohui/Desktop/JenkinsTest
-        xcodebuild -exportArchive -archivePath "build/JenkinsTest.xcarchive" -exportOptionsPlist "exportOptions.plist" -exportPath "build"
+      - name: Export Archive
+        run: |
+          xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa
 
-    - name: Upload to App Store
-      run: |
-        cd /Users/fuyaohui/Desktop/JenkinsTest
-        xcrun altool --upload-app -f "build/JenkinsTest.ipa" -u "diligencefu@sina.com" -p "kwby-cfyy-bchh-pawx"
+      - name: Upload to App Store
+        uses: actions/upload-artifact@v2
+        with:
+          name: JenkinsTest
+          path: JenkinsTest.ipa
+
+  submit:
+    needs: build
+    runs-on: macos-latest
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: JenkinsTest
+          path: JenkinsTest.ipa
+
+      - name: Set up App Store Connect
+        uses: devbotsxyz/appstore-connect-cli-action@v1
+        with:
+          appstore-connect-private-key: ${{ secrets.APPSTORE_CONNECT_PRIVATE_KEY }}
+          appstore-connect-issuer-id: ${{ secrets.APPSTORE_CONNECT_ISSUER_ID }}
+          appstore-connect-key-id: ${{ secrets.APPSTORE_CONNECT_KEY_ID }}
+          appstore-connect-app-id: YourAppID
+
+      - name: Upload to App Store Connect
+        run: |
+          appstore-connect upload JenkinsTest.ipa --wait-for-processing
