@@ -32,13 +32,11 @@ jobs:
           /usr/local/bin/pod install
 
       - name: Build resolve Swift dependencies
-        run: xcodebuild -resolvePackageDependencies -workspace ios/JenkinsTest.xcworkspace -scheme JenkinsTest -configuration Release
+        run: xcodebuild -resolvePackageDependencies -workspace JenkinsTest.xcworkspace -scheme JenkinsTest -configuration Release
         
       - name: Build xArchive
-        env:
-            TEAM_ID:${{ secrets.TEAM_ID }}
         run: |
-              xcodebuild -workspace ios/JenkinsTest.xcworkspace -scheme JenkinsTest -configuration Release DEVELOPMENT_TEAM=$TEAM_ID -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath build-output/JenkinsTest.xcarchive PROVISIONING_PROFILE=0b012feb-aea9-4e90-b172-39986cb0f0f0 clean archive CODE_SIGN_IDENTITY="iPhone Distribution"
+              xcodebuild -workspace ios/JenkinsTest.xcworkspace -scheme JenkinsTest -configuration Release DEVELOPMENT_TEAM=${{ secrets.TEAM_ID }} -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath build-output/JenkinsTest.xcarchive PROVISIONING_PROFILE=0b012feb-aea9-4e90-b172-39986cb0f0f0 clean archive CODE_SIGN_IDENTITY="iPhone Distribution"
 
       - name: Export ipa
         run: xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa
