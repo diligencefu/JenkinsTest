@@ -55,9 +55,6 @@ jobs:
 
       - name: Upload IPA
         uses: actions/upload-artifact@v2
-        with:
-          name: JenkinsTest
-          path: JenkinsTest.ipa
-          run : "/Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool" --upload-app -f "JenkinsTest.ipa" -u "diligencefu@sina.com" -p "kwby-cfyy-bchh-pawx" -t ios --output-format xml
+        run : "/Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool" --upload-app -f "JenkinsTest.ipa" -u "diligencefu@sina.com" -p "kwby-cfyy-bchh-pawx" -t ios --output-format xml
         
 
