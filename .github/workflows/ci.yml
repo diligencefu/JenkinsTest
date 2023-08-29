@@ -12,77 +12,34 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
-          /usr/local/bin/pod install
-
       - name: Install Apple Certificate
         uses: apple-actions/import-codesign-certs@v1
         with:
             p12-file-base64: ${{ secrets.TRUSTY_CAR }}
             p12-password: ${{ secrets.TRUSTY_CAR_PSW }}
 
-
-#     - name: Install the provisioning profile
-#        env:
-#          PROVISIONING_CERTIFICATE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
-#        run: |
-#            PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
-#
-#            echo -n "$PROVISIONING_CERTIFICATE_BASE64" | base64 --decode --output $PP_PATH
-#
-#            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-#            cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+      - name: Install the provisioning profile
+         env:
+         PROVISIONING_CERTIFICATE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+        run: |
       
-#      - name: Configure Xcode signing
-#        run: |
-#          # 导入证书和描述文件的命令
-#          security create-keychain -p 123456 build.keychain
-#          security import path/to/certificate.p12 -P 123456 -A -t cert -f pkcs12 -k ~/Library/Keychains/build.keychain
-#          security import path/to/profile.mobileprovision -k ~/Library/MobileDevice/Provisioning\ Profiles/build.keychain
-#
-      - name: Unlock keychain
+            PP_PATH=$RUNNER_TEMP/0b012feb-aea9-4e90-b172-39986cb0f0f0.mobileprovision
+            
+            echo -n "$PROVISIONING_CERTIFICATE_BASE64" | base64 --decode --output $PP_PATH
+            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+            cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+      - name: Install dependencies
         run: |
-         security unlock-keychain -p lixiaona ~/Library/Keychains/login.keychain
+          /usr/local/bin/pod install
 
-      - name: Set Xcode signing
+      - name: Build resolve Swift dependencies
+        run: xcodebuild -resolvePackageDependencies -workspace ios/JenkinsTest.xcworkspace -scheme JenkinsTest -configuration Release
+        
+      - name: Build xArchive
         run: |
-          # 配置 Xcode 项目的签名
-          xcodebuild -project JenkinsTest.xcodeproj -scheme JenkinsTest  -allowProvisioningUpdates
-          
-      - name: Build and Archive
-        run: |
-            xcodebuild -workspace JenkinsTest.xcworkspace -scheme JenkinsTest -sdk iphoneos archive -archivePath JenkinsTest.xcarchive
+              xcodebuild -workspace ios/JenkinsTest.xcworkspace -scheme JenkinsTest -configuration Release DEVELOPMENT_TEAM=F22YRQ2QK9 -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath build-output/JenkinsTest.xcarchive PROVISIONING_PROFILE=0b012feb-aea9-4e90-b172-39986cb0f0f0 clean archive CODE_SIGN_IDENTITY="iPhone Distribution"
 
-      - name: Export Archive
-        run: |
-          xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa
+      - name: Export ipa
+        run: xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa
 
-      - name: Upload to App Store
-        uses: actions/upload-artifact@v2
-        with:
-          name: JenkinsTest
-          path: JenkinsTest.ipa
-
-  submit:
-    needs: build
-    runs-on: macos-latest
-
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: JenkinsTest
-          path: JenkinsTest.ipa
-
-      - name: Set up App Store Connect
-        uses: devbotsxyz/appstore-connect-cli-action@v1
-        with:
-          appstore-connect-private-key: ${{ secrets.APPSTORE_CONNECT_PRIVATE_KEY }}
-          appstore-connect-issuer-id: ${{ secrets.APPSTORE_CONNECT_ISSUER_ID }}
-          appstore-connect-key-id: ${{ secrets.APPSTORE_CONNECT_KEY_ID }}
-          appstore-connect-app-id: YourAppID
-
-      - name: Upload to App Store Connect
-        run: |
-          appstore-connect upload JenkinsTest.ipa --wait-for-processing
