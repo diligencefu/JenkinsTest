@@ -64,8 +64,8 @@ jobs:
 
       - name: Export IPA
         run: |
-          xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+          xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }} -allowProvisioningUpdates
 
       - name: Upload to App Store
         run: |
-          xcrun altool --upload-app -f YourApp.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx --asc-provider ${{ secrets.TEAM_ID }}
+          xcrun altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx --asc-provider ${{ secrets.TEAM_ID }}
