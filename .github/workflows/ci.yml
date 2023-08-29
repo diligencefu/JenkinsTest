@@ -50,7 +50,7 @@ jobs:
 #        run: xcodebuild archive -project JenkinsTest.xcworkspace -scheme JenkinsTest -archivePath JenkinsTest.xcarchive
 
       - name: Export IPA
-        run: xcodebuild -exportArchive -archivePath build-output/JenkinsTest.xcarchive -exportPath build-output/ -exportOptionsPlist ExportOptions.plist
+        run: xcodebuild -exportArchive -archivePath build-output/JenkinsTest.xcarchive -exportPath build-output/ -exportOptionsPlist ExportOptions.plist PROVISIONING_PROFILE=0b012feb-aea9-4e90-b172-39986cb0f0f0
 
       - name: Upload IPA
         uses: actions/upload-artifact@v2
