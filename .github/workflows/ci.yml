@@ -34,16 +34,16 @@ jobs:
 #            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 #            cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
       
-      - name: Configure Xcode signing
-        run: |
-          # 导入证书和描述文件的命令
-          security create-keychain -p 123456 build.keychain
-          security import path/to/certificate.p12 -P 123456 -A -t cert -f pkcs12 -k ~/Library/Keychains/build.keychain
-          security import path/to/profile.mobileprovision -k ~/Library/MobileDevice/Provisioning\ Profiles/build.keychain
-
-      - name: Unlock keychain
-        run: |
-          security unlock-keychain -p 123456 ~/Library/Keychains/build.keychain
+#      - name: Configure Xcode signing
+#        run: |
+#          # 导入证书和描述文件的命令
+#          security create-keychain -p 123456 build.keychain
+#          security import path/to/certificate.p12 -P 123456 -A -t cert -f pkcs12 -k ~/Library/Keychains/build.keychain
+#          security import path/to/profile.mobileprovision -k ~/Library/MobileDevice/Provisioning\ Profiles/build.keychain
+#
+#      - name: Unlock keychain
+#        run: |
+#          security unlock-keychain -p 123456 ~/Library/Keychains/build.keychain
           
       - name: Set Xcode signing
         run: |
