@@ -50,11 +50,9 @@ jobs:
         run: xcodebuild archive -project JenkinsTest.xcworkspace -scheme JenkinsTest -archivePath JenkinsTest.xcarchive
 
       - name: Export IPA
-        run: |
-          xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa
-
+        run: xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa
+        
       - name: Upload IPA
-        uses: actions/upload-artifact@v2
-        run : "/Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool" --upload-app -f "JenkinsTest.ipa" -u "diligencefu@sina.com" -p "kwby-cfyy-bchh-pawx" -t ios --output-format xml
+        run : | "/Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool" --upload-app -f "JenkinsTest.ipa" -u "diligencefu@sina.com" -p "kwby-cfyy-bchh-pawx" -t ios --output-format xml
         
 
