@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>provisioningProfiles</key>
-	<string>/Users/fuyaohui/Library/MobileDevice/Provisioning\ Profiles/0b012feb-aea9-4e90-b172-39986cb0f0f0.mobileprovision</string>
 	<key>teamID</key>
 	<string>F22YRQ2QK9</string>
 	<key>method</key>
