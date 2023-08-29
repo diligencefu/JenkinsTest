@@ -41,14 +41,14 @@ jobs:
 #          security import path/to/certificate.p12 -P 123456 -A -t cert -f pkcs12 -k ~/Library/Keychains/build.keychain
 #          security import path/to/profile.mobileprovision -k ~/Library/MobileDevice/Provisioning\ Profiles/build.keychain
 #
-#      - name: Unlock keychain
-#        run: |
-#          security unlock-keychain -p 123456 ~/Library/Keychains/build.keychain
-          
+      - name: Unlock keychain
+        run: |
+         security unlock-keychain -p lixiaona ~/Library/Keychains/login.keychain
+
       - name: Set Xcode signing
         run: |
           # 配置 Xcode 项目的签名
-          xcodebuild -project JenkinsTest.xcworkspace -scheme JenkinsTest  -allowProvisioningUpdates
+          xcodebuild -project JenkinsTest.xcodeproj -scheme JenkinsTest  -allowProvisioningUpdates
           
       - name: Build and Archive
         run: |
