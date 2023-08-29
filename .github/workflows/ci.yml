@@ -16,6 +16,24 @@ jobs:
         run: |
           /usr/local/bin/pod install
 
+     - name: Install Apple Certificate
+       uses: apple-actions/import-codesign-certs@v1
+       with:
+            p12-file-base64: ${{ secrets.TRUSTY_CAR }}
+            p12-password: ${{ secrets.TRUSTY_CAR_PSW }}
+
+
+#     - name: Install the provisioning profile
+#        env:
+#          PROVISIONING_CERTIFICATE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+#        run: |
+#            PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+#
+#            echo -n "$PROVISIONING_CERTIFICATE_BASE64" | base64 --decode --output $PP_PATH
+#
+#            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+#            cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+      
       - name: Configure Xcode signing
         run: |
           # 导入证书和描述文件的命令
