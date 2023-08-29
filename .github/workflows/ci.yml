@@ -38,9 +38,9 @@ jobs:
       - name: Build xArchive
         run: |
               xcodebuild -workspace JenkinsTest.xcworkspace -scheme JenkinsTest -configuration Release DEVELOPMENT_TEAM=${{ secrets.TEAM_ID }} -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath build-output/JenkinsTest.xcarchive PROVISIONING_PROFILE=0b012feb-aea9-4e90-b172-39986cb0f0f0 clean archive CODE_SIGN_IDENTITY="iPhone Distribution"
-#
-#      - name: Print Archive Path
-#            run: echo "Archive path: $PWD/JenkinsTest.xcarchive"
+
+      - name: Print Archive Path
+            run: echo "Archive path: $PWD/JenkinsTest.xcarchive"
 #
 #      - name: Export ipa
 #        run: xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa
@@ -50,8 +50,7 @@ jobs:
 #        run: xcodebuild archive -project JenkinsTest.xcworkspace -scheme JenkinsTest -archivePath JenkinsTest.xcarchive
 
       - name: Export IPA
-        run: xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa
-        
+          run: xcodebuild -exportArchive -archivePath build-output/JenkinsTest.xcarchive -exportPath build-output -exportOptionsPlist ExportOptions.plist
 
       - name: Upload IPA
         uses: actions/upload-artifact@v2
