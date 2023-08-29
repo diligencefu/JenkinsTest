@@ -6,5 +6,10 @@
 	<string>F22YRQ2QK9</string>
 	<key>method</key>
 	<string>app-store</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>0b012feb-aea9-4e90-b172-39986cb0f0f0. mobileprovision</key>
+		<string>distribution</string>
+	</dict>
 </dict>
 </plist>
