@@ -23,28 +23,28 @@ jobs:
             p12-password: ${{ secrets.TRUSTY_CAR_PSW }}
 
 
-     - name: Install the provisioning profile
-        env:
-          PROVISIONING_CERTIFICATE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
-        run: |
-            PP_PATH=$RUNNER_TEMP/TRUSTY_CAR_CI.mobileprovision
-
-            echo -n "$PROVISIONING_CERTIFICATE_BASE64" | base64 --decode --output $PP_PATH
-
-            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-            cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-      
-      - name: Configure Xcode signing
-        run: |
-          # 导入证书和描述文件的命令
-          security create-keychain -p secrets.TRUSTY_CAR_PSW build.keychain
-          security import path/to/certificate.p12 -P 123456 -A -t cert -f pkcs12 -k ~/Library/Keychains/build.keychain
-          security import path/to/profile.mobileprovision -k ~/Library/MobileDevice/Provisioning\ Profiles/build.keychain
+#     - name: Install the provisioning profile
+#        env:
+#          PROVISIONING_CERTIFICATE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+#        run: |
+#            PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
 #
-      - name: Unlock keychain
-        run: |
-          security unlock-keychain -p lixiaona ~/Library/Keychains/login.keychain
-
+#            echo -n "$PROVISIONING_CERTIFICATE_BASE64" | base64 --decode --output $PP_PATH
+#
+#            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+#            cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+      
+#      - name: Configure Xcode signing
+#        run: |
+#          # 导入证书和描述文件的命令
+#          security create-keychain -p 123456 build.keychain
+#          security import path/to/certificate.p12 -P 123456 -A -t cert -f pkcs12 -k ~/Library/Keychains/build.keychain
+#          security import path/to/profile.mobileprovision -k ~/Library/MobileDevice/Provisioning\ Profiles/build.keychain
+#
+#      - name: Unlock keychain
+#        run: |
+#          security unlock-keychain -p 123456 ~/Library/Keychains/build.keychain
+          
       - name: Set Xcode signing
         run: |
           # 配置 Xcode 项目的签名
