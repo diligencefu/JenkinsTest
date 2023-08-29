@@ -16,9 +16,9 @@ jobs:
         run: |
           /usr/local/bin/pod install
 
-     - name: Install Apple Certificate
-       uses: apple-actions/import-codesign-certs@v1
-       with:
+      - name: Install Apple Certificate
+        uses: apple-actions/import-codesign-certs@v1
+        with:
             p12-file-base64: ${{ secrets.TRUSTY_CAR }}
             p12-password: ${{ secrets.TRUSTY_CAR_PSW }}
 
