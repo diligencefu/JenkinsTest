@@ -74,8 +74,12 @@ jobs:
 #        run: |
 #          xcrun altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx --asc-provider F22YRQ2QK9 --type ios
 
-      - name: Upload IPA
-        uses: actions/upload-artifact@v2
-        with:
-          name: JenkinsTest IPA
-          path: JenkinsTest.ipa
+#      - name: Upload IPA
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: JenkinsTest IPA
+#          path: JenkinsTest.ipa
+
+      - name: Upload to App Store
+        run: |
+          transporter -m upload -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx -f JenkinsTest.ipa
