@@ -8,8 +8,8 @@
 	<string>app-store</string>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>0b012feb-aea9-4e90-b172-39986cb0f0f0. mobileprovision</key>
-		<string>distribution</string>
+		<key>com.JenkinsTest.test</key>
+		<string>0b012feb-aea9-4e90-b172-39986cb0f0f0. mobileprovision</string>
 	</dict>
 </dict>
 </plist>
