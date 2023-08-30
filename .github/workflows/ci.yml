@@ -72,4 +72,4 @@ jobs:
 
       - name: Upload to App Store
         run: |
-          xcrun altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx --asc-provider F22YRQ2QK9 --type iOS
+          xcrun altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx --asc-provider F22YRQ2QK9 --type ios
