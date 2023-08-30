@@ -67,9 +67,7 @@ jobs:
           xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
 
       - name: Upload to App Store
-         env:
-            ALTOOL_PATH: "/Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool"
          run: |
 #          xcrun altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx --asc-provider ${{ secrets.TEAM_ID }}
 
-                      "$ALTOOL_PATH" --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx -t ios --output-format xml
+            /Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx -t ios --output-format xml
