@@ -9,7 +9,7 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>com.JenkinsTest.test</key>
-		<string>TRUSTY_CAR_CI.mobileprovision</string>
+		<string>TRUSTY_CAR_CI</string>
 	</dict>
 </dict>
 </plist>
