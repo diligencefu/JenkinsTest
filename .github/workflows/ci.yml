@@ -68,6 +68,4 @@ jobs:
 
       - name: Upload to App Store
          run: |
-#          xcrun altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx --asc-provider ${{ secrets.TEAM_ID }}
-
             /Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx -t ios --output-format xml
