@@ -68,4 +68,4 @@ jobs:
 
       - name: Upload to App Store
          run: |
-            /Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx -t ios --output-format xml
+        "/Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool" --upload-app -f "${WORKSPACE}/builds/${BUILD_NUMBER}/${JOB_NAME}_${BUILD_NUMBER}/${ipaName}.ipa" -u "diligencefu@sina.com" -p "kwby-cfyy-bchh-pawx" -t ios --output-format xml
