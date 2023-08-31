@@ -64,7 +64,7 @@ jobs:
 
       - name: Export IPA
         run: |
-          xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+          xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath "~/Downloads/JenkinsTest" PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
 
 #      - name: Upload to App Store
 #         run: "/Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool" --upload-app -f JenkinsTest.ipa -u "diligencefu@sina.com" -p "kwby-cfyy-bchh-pawx" -t ios --output-format xml
@@ -72,7 +72,7 @@ jobs:
 
       - name: Upload to App Store
         run: |
-            xcrun altool --upload-app -f "JenkinsTest IPA/JenkinsTest.ipa" -t ios -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx
+            xcrun altool --upload-app -f "~/Downloads/JenkinsTest/JenkinsTest.ipa" -t ios -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx
 
 #          xcrun altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx --asc-provider F22YRQ2QK9 --type ios
 
