@@ -80,13 +80,13 @@ jobs:
 #          name: JenkinsTest IPA
 #          path: JenkinsTest.ipa
 
-#      - name: Upload to App Store
-#        run: |
-#            /Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool --upload-app -f "/Users/fuyaohui/Downloads/JenkinsTestIPA/JenkinsTest.ipa" -u "diligencefu@sina.com" -p "kwby-cfyy-bchh-pawx" -t ios --output-format xml
+      - name: Upload to App Store
+        run: |
+            /Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/ --upload-app -f "/Users/fuyaohui/Downloads/JenkinsTestIPA/JenkinsTest.ipa" -u "diligencefu@sina.com" -p "kwby-cfyy-bchh-pawx" -t ios --output-format xml
 
 
 #      - name: Install App Store Connect CLI
 #        run: brew install spaceship
 
-      - name: Upload to App Store Connect
-        run: spaceship upload -u diligencefu@sina.com -a 6463008569 -p kwby-cfyy-bchh-pawx JenkinsTest.ipa
+#      - name: Upload to App Store Connect
+#        run: spaceship upload -u diligencefu@sina.com -a 6463008569 -p kwby-cfyy-bchh-pawx JenkinsTest.ipa
