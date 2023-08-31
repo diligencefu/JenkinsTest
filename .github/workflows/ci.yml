@@ -72,7 +72,10 @@ jobs:
 
       - name: Upload to App Store
         run: |
-          xcrun altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx --asc-provider F22YRQ2QK9 --type ios
+#          xcrun altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx --asc-provider F22YRQ2QK9 --type ios
+
+          xcrun altool --upload-app -f JenkinsTest.ipa -t ios -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx
+
 
 #      - name: Upload IPA
 #        uses: actions/upload-artifact@v2
@@ -90,3 +93,10 @@ jobs:
 
 #      - name: Upload to App Store Connect
 #        run: spaceship upload -u diligencefu@sina.com -a 6463008569 -p kwby-cfyy-bchh-pawx JenkinsTest.ipa
+
+
+#      - name: Validate archive
+#        run: xcodebuild -exportArchive -archivePath YourApp.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath YourApp.ipa && xcrun altool --validate-app -f YourApp.ipa -t ios --apiKey YOUR_API_KEY --apiIssuer YOUR_API_ISSUER
+#
+#      - name: Upload to App Store Connect
+#        run: xcrun altool --upload-app -f YourApp.ipa -t ios --apiKey YOUR_API_KEY --apiIssuer YOUR_API_ISSUER
