@@ -1,9 +1,10 @@
 name: Build and Submit to App Store
 on:
+  workflow_dispatch:
   push:
     branches:
-      - main
-
+      - 'pack/**'
+      
 jobs:
   build:
     runs-on: macos-latest
@@ -34,31 +35,6 @@ jobs:
       - name: Build resolve Swift dependencies
         run: xcodebuild -resolvePackageDependencies -workspace JenkinsTest.xcworkspace -scheme JenkinsTest -configuration Release
         
-        
-#      - name: Build xArchive
-#        run: |
-#              xcodebuild -workspace JenkinsTest.xcworkspace -scheme JenkinsTest -configuration Release DEVELOPMENT_TEAM=${{ secrets.TEAM_ID }} -sdk 'iphoneos' -destination 'generic/platform=iOS' -archivePath build-output/JenkinsTest.xcarchive PROVISIONING_PROFILE=0b012feb-aea9-4e90-b172-39986cb0f0f0 clean archive CODE_SIGN_IDENTITY="iPhone Distribution"
-
-#      - name: Print Archive Path
-#            run: echo "Archive path: $PWD/JenkinsTest.xcarchive"
-#
-#      - name: Export ipa
-#        run: xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath JenkinsTest.ipa
-
-
-#      - name: Archive
-#        run: xcodebuild archive -project JenkinsTest.xcworkspace -scheme JenkinsTest -archivePath JenkinsTest.xcarchive
-
-#      - name: Export IPA
-#        run: xcodebuild -exportArchive -archivePath build-output/JenkinsTest.xcarchive -exportPath build-output/ -exportOptionsPlist ExportOptions.plist PROVISIONING_PROFILE=0b012feb-aea9-4e90-b172-39986cb0f0f0
-#
-#      - name: Upload IPA
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: JenkinsTest
-#          path: JenkinsTest.ipa
-
-
       - name: Archive
         run: xcodebuild archive -workspace JenkinsTest.xcworkspace -scheme JenkinsTest -archivePath JenkinsTest.xcarchive
 
@@ -66,36 +42,6 @@ jobs:
         run: |
           xcodebuild -exportArchive -archivePath JenkinsTest.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath "~/Downloads/JenkinsTest" PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
 
-#      - name: Upload to App Store
-#         run: "/Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool" --upload-app -f JenkinsTest.ipa -u "diligencefu@sina.com" -p "kwby-cfyy-bchh-pawx" -t ios --output-format xml
-
-
       - name: Upload to App Store
         run: |
             xcrun altool --upload-app -f "~/Downloads/JenkinsTest/JenkinsTest.ipa" -t ios -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx
-
-#          xcrun altool --upload-app -f JenkinsTest.ipa -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx --asc-provider F22YRQ2QK9 --type ios
-
-#      - name: Upload IPA
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: JenkinsTest IPA
-#          path: JenkinsTest.ipa
-
-#      - name: Upload to App Store
-#        run: |
-#            /Applications/Transporter.app/Contents/Frameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool --upload-app -f "/Users/fuyaohui/Downloads/JenkinsTestIPA/JenkinsTest.ipa" -u "diligencefu@sina.com" -p "kwby-cfyy-bchh-pawx" -t ios --output-format xml
-
-
-#      - name: Install App Store Connect CLI
-#        run: brew install spaceship
-
-#      - name: Upload to App Store Connect
-#        run: spaceship upload -u diligencefu@sina.com -a 6463008569 -p kwby-cfyy-bchh-pawx JenkinsTest.ipa
-
-
-#      - name: Validate archive
-#        run: xcodebuild -exportArchive -archivePath YourApp.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath YourApp.ipa && xcrun altool --validate-app -f YourApp.ipa -t ios --apiKey YOUR_API_KEY --apiIssuer YOUR_API_ISSUER
-#
-#      - name: Upload to App Store Connect
-#        run: xcrun altool --upload-app -f YourApp.ipa -t ios --apiKey YOUR_API_KEY --apiIssuer YOUR_API_ISSUER
