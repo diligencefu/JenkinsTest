@@ -1,17 +1,17 @@
 name: Build and Submit to App Store
 on:
-    workflow_dispatch:
-    push:
+  workflow_dispatch:
+  push:
     branches:
-        - 'pack/**'
-
+      - 'pack/**'
+            
 env:
     PRODUCT_NAME: "JenkinsTest"
     XCWORKSPACE_NAME: "JenkinsTest"
     PROJSCHEME_NAME: "JenkinsTest"
     ARCHIVE_NAME: "JenkinsTest"
     PROVISIONING_PROFILE_NAME: "${{ secrets.PROVISIONING_PROFILE_BASE64 }}"
-
+    
 jobs:
   build:
     runs-on: macos-latest
@@ -31,28 +31,28 @@ jobs:
           /usr/local/bin/pod install
 
       - name: Build resolve Swift dependencies
-        run: xcodebuild -resolvePackageDependencies -workspace $XCWORKSPACE_NAME.xcworkspace -scheme "$PROJSCHEME_NAME" -configuration Debug
+        run: xcodebuild -resolvePackageDependencies -workspace $XCWORKSPACE_NAME.xcworkspace -scheme $PROJSCHEME_NAME -configuration Release
         
       - name: Archive
-        run: xcodebuild archive -workspace $XCWORKSPACE_NAME.xcworkspace -scheme "$PROJSCHEME_NAME" -archivePath $ARCHIVE_NAME.xcarchive
+        run: xcodebuild archive -workspace $XCWORKSPACE_NAME.xcworkspace -scheme $PROJSCHEME_NAME -archivePath $ARCHIVE_NAME.xcarchive
 
       - name: Export IPA
         run: |
-          xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath "~/Downloads/$ARCHIVE_NAME"
+          xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath "~/Downloads/$PROJSCHEME_NAME"
 #          PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
 
       - name: Upload to App Store
         run: |
-            xcrun altool --upload-app -f "~/Downloads/$ARCHIVE_NAME/$XCWORKSPACE_NAME.ipa" -t ios -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx
-            
-        - name: install plistbuddy
+            xcrun altool --upload-app -f "~/Downloads/$PROJSCHEME_NAME/$PRODUCT_NAME.ipa" -t ios -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx
+
+      - name: install plistbuddy
         run: |
             brew install --cask plistbuddy
-                
-        - name: get VERSION & BUILD
+        
+      - name: get VERSION & BUILD
         env:
             VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" {{your_project_directory}}/Info.plist)
             BUILD=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" {{your_project_directory}}/Info.plist)
         run: |
-            echo "iOS project version: $VERSION"
-            echo "iOS project build: $BUILD"
+                echo "iOS project version: $VERSION"
+                echo "iOS project build: $BUILD"
