@@ -29,7 +29,6 @@ jobs:
       - name: Install dependencies
         run: |
           /usr/local/bin/pod install
-#        export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890 如果有需要key把这句放到install前面
 
       - name: Build resolve Swift dependencies
         run: xcodebuild -resolvePackageDependencies -workspace $XCWORKSPACE_NAME.xcworkspace -scheme "$PROJSCHEME_NAME" -configuration Debug
