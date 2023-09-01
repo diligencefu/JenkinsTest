@@ -15,7 +15,6 @@ env:
 jobs:
     build:
     runs-on: macos-latest
-    
     steps:
         - name: Checkout code
         uses: actions/checkout@v2
@@ -25,16 +24,7 @@ jobs:
         with:
             p12-file-base64: ${{ secrets.TRUSTY_CAR }}
             p12-password: ${{ secrets.TRUSTY_CAR_PSW }}
-        
-#        - name: Install the provisioning profile
-#        run: |
-#            
-#            PP_PATH=$RUNNER_TEMP/0b012feb-aea9-4e90-b172-39986cb0f0f0.mobileprovision
-#            
-#            echo -n "$PROVISIONING_PROFILE_NAME" | base64 --decode --output $PP_PATH
-#            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-#            cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-        
+                
         - name: Install dependencies
         run: |
           /usr/local/bin/pod install
