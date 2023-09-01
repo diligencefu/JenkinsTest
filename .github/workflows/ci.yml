@@ -38,8 +38,7 @@ jobs:
 
       - name: Export IPA
         run: |
-          xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath "~/Downloads/$PROJSCHEME_NAME"
-#          PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+          xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath "~/Downloads/$PROJSCHEME_NAME" PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
 
       - name: Upload to App Store
         run: |
