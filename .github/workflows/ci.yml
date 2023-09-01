@@ -51,8 +51,8 @@ jobs:
         
       - name: get VERSION & BUILD
         env:
-            VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" {{your_project_directory}}/Info.plist)
-            BUILD=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" {{your_project_directory}}/Info.plist)
+            VERSION:$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" {{your_project_directory}}/Info.plist)
+            BUILD:$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" {{your_project_directory}}/Info.plist)
         run: |
                 echo "iOS project version: $VERSION"
                 echo "iOS project build: $BUILD"
