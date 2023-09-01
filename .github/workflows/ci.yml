@@ -48,17 +48,18 @@ jobs:
       - name: Export IPA
         run: |
           xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath "~/Downloads/$PROJSCHEME_NAME"
-#          PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+          PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
 
       - name: Upload to App Store
         run: |
             xcrun altool --upload-app -f "~/Downloads/$PROJSCHEME_NAME/$PRODUCT_NAME.ipa" -t ios -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx
 
-      - name: install plistbuddy
+      - name: Get iOS project version and build number
         run: |
-            brew install --cask plistbuddy
-        
-      - name: get VERSION & BUILD
-        run: |
-                echo "iOS project version: ${/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString"  JenkinsTest/Info.plist}"
-                echo "iOS project build: ${/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" JenkinsTest/Info.plist}"
+          cd JenkinsTest
+          version=$(agvtool what-marketing-version -terse1)
+          build=$(agvtool what-version -terse)
+          echo "iOS project version: $version"
+          echo "iOS project build number: $build"
+          
+          curl -X POST -H "Content-Type: application/json" -d '{"msg_type":"text","content":{"text":"${{env.PROJSCHEME_NAME}} had submitted Testflight!"}}' https://open.larksuite.com/open-apis/bot/v2/hook/f85c8bb2-b5ae-4726-b93c-f1cb29cf8d17
