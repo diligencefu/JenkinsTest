@@ -26,6 +26,15 @@ jobs:
             p12-file-base64: ${{ secrets.TRUSTY_CAR }}
             p12-password: ${{ secrets.TRUSTY_CAR_PSW }}
 
+      - name: Install the provisioning profile
+        run: |
+
+            PP_PATH=$RUNNER_TEMP/$PROVISIONING_PROFILE_LOCAL_NAME.mobileprovision
+
+            echo -n "$PROVISIONING_PROFILE_NAME" | base64 --decode --output $PP_PATH
+            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+            cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
       - name: Install dependencies
         run: |
           /usr/local/bin/pod install
@@ -38,7 +47,8 @@ jobs:
 
       - name: Export IPA
         run: |
-          xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath "~/Downloads/$PROJSCHEME_NAME" PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+          xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath "~/Downloads/$PROJSCHEME_NAME"
+#          PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
 
       - name: Upload to App Store
         run: |
