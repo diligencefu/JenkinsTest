@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - 'pack/**'
+      - main
             
 env:
     PRODUCT_NAME: "JenkinsTest"
