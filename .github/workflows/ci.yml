@@ -1,57 +1,67 @@
 name: Build and Submit to App Store
 on:
-  workflow_dispatch:
-  push:
+    workflow_dispatch:
+    push:
     branches:
-      - 'pack/**'
-            
+        - 'pack/**'
+
 env:
     PRODUCT_NAME: "JenkinsTest"
     XCWORKSPACE_NAME: "JenkinsTest"
     PROJSCHEME_NAME: "JenkinsTest"
     ARCHIVE_NAME: "JenkinsTest"
     PROVISIONING_PROFILE_NAME: "${{ secrets.PROVISIONING_PROFILE_BASE64 }}"
-    
+
 jobs:
-  build:
+    build:
     runs-on: macos-latest
-
+    
     steps:
-      - name: Checkout code
+        - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Install Apple Certificate
+        
+        - name: Install Apple Certificate
         uses: apple-actions/import-codesign-certs@v1
         with:
             p12-file-base64: ${{ secrets.TRUSTY_CAR }}
             p12-password: ${{ secrets.TRUSTY_CAR_PSW }}
-
-      - name: Install the provisioning profile
-        run: |
-
-            PP_PATH=$RUNNER_TEMP/0b012feb-aea9-4e90-b172-39986cb0f0f0.mobileprovision
-
-            echo -n "$PROVISIONING_PROFILE_NAME" | base64 --decode --output $PP_PATH
-            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-            cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-
-      - name: Install dependencies
+        
+#        - name: Install the provisioning profile
+#        run: |
+#            
+#            PP_PATH=$RUNNER_TEMP/0b012feb-aea9-4e90-b172-39986cb0f0f0.mobileprovision
+#            
+#            echo -n "$PROVISIONING_PROFILE_NAME" | base64 --decode --output $PP_PATH
+#            mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+#            cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+        
+        - name: Install dependencies
         run: |
           /usr/local/bin/pod install
-
-      - name: Build resolve Swift dependencies
+        
+        - name: Build resolve Swift dependencies
         run: xcodebuild -resolvePackageDependencies -workspace $XCWORKSPACE_NAME.xcworkspace -scheme $PROJSCHEME_NAME -configuration Release
         
-      - name: Archive
+        - name: Archive
         run: xcodebuild archive -workspace $XCWORKSPACE_NAME.xcworkspace -scheme $PROJSCHEME_NAME -archivePath $ARCHIVE_NAME.xcarchive
-
-      - name: Export IPA
+        
+        - name: Export IPA
         run: |
           xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath "~/Downloads/$PROJSCHEME_NAME"
 #          PROVISIONING_PROFILE=${{ secrets.PROVISIONING_PROFILE_BASE64 }}
-
-      - name: Upload to App Store
+    
+        - name: Upload to App Store
         run: |
             xcrun altool --upload-app -f "~/Downloads/$PROJSCHEME_NAME/$PRODUCT_NAME.ipa" -t ios -u diligencefu@sina.com -p kwby-cfyy-bchh-pawx
-
-
+        
+        - name: install plistbuddy
+        run: |
+            brew install --cask plistbuddy
+                
+        - name: get VERSION & BUILD
+        env:
+            VERSION=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" {{your_project_directory}}/Info.plist)
+            BUILD=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" {{your_project_directory}}/Info.plist)
+        run: |
+            echo "iOS project version: $VERSION"
+            echo "iOS project build: $BUILD"
