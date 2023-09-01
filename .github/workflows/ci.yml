@@ -54,5 +54,5 @@ jobs:
             VERSION:$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" {{your_project_directory}}/Info.plist)
             BUILD:$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" {{your_project_directory}}/Info.plist)
         run: |
-                echo "iOS project version: $VERSION"
-                echo "iOS project build: $BUILD"
+                echo "iOS project version: ${/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString"  JenkinsTest/Info.plist}"
+                echo "iOS project build: ${/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" JenkinsTest/Info.plist}"
