@@ -14,26 +14,8 @@
 		4C1B78942A94B58900953E68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C1B78932A94B58900953E68 /* Assets.xcassets */; };
 		4C1B78972A94B58900953E68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C1B78952A94B58900953E68 /* LaunchScreen.storyboard */; };
 		4CA9DF8F2B0364C30034B178 /* LNFlutterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA9DF8E2B0364C30034B178 /* LNFlutterViewController.swift */; };
-		4CA9DF992B048CA90034B178 /* App.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA9DF982B048CA90034B178 /* App.xcframework */; };
-		4CA9DF9A2B048CA90034B178 /* App.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA9DF982B048CA90034B178 /* App.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4CA9DFA92B048D930034B178 /* App.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA9DFA12B048D930034B178 /* App.xcframework */; };
-		4CA9DFAA2B048D930034B178 /* Flutter.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 4CA9DFA22B048D930034B178 /* Flutter.podspec */; };
 		5F9AC2F7436EED0791DEA19A /* Pods_JenkinsTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DF436F51D7CF35026FC7CF /* Pods_JenkinsTest.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		4CA9DF9B2B048CA90034B178 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				4CA9DF9A2B048CA90034B178 /* App.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		24DF436F51D7CF35026FC7CF /* Pods_JenkinsTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JenkinsTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,8 +31,6 @@
 		4C1B78982A94B58900953E68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CA9DF8E2B0364C30034B178 /* LNFlutterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LNFlutterViewController.swift; sourceTree = "<group>"; };
 		4CA9DF982B048CA90034B178 /* App.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = App.xcframework; path = ../Flutter_Projects/nft/Framework/1/Release/App.xcframework; sourceTree = "<group>"; };
-		4CA9DFA12B048D930034B178 /* App.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = App.xcframework; sourceTree = "<group>"; };
-		4CA9DFA22B048D930034B178 /* Flutter.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Flutter.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +39,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F9AC2F7436EED0791DEA19A /* Pods_JenkinsTest.framework in Frameworks */,
-				4CA9DF992B048CA90034B178 /* App.xcframework in Frameworks */,
-				4CA9DFA92B048D930034B178 /* App.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +84,6 @@
 		4C1B78892A94B58800953E68 /* JenkinsTest */ = {
 			isa = PBXGroup;
 			children = (
-				4CA9DF9E2B048D930034B178 /* Framework */,
 				4C1B788A2A94B58800953E68 /* AppDelegate.swift */,
 				4CA9DF8E2B0364C30034B178 /* LNFlutterViewController.swift */,
 				4C1B788C2A94B58800953E68 /* SceneDelegate.swift */,
@@ -117,32 +94,6 @@
 				4C1B78982A94B58900953E68 /* Info.plist */,
 			);
 			path = JenkinsTest;
-			sourceTree = "<group>";
-		};
-		4CA9DF9E2B048D930034B178 /* Framework */ = {
-			isa = PBXGroup;
-			children = (
-				4CA9DF9F2B048D930034B178 /* 1 */,
-			);
-			name = Framework;
-			path = ../../Flutter_Projects/nft/Framework;
-			sourceTree = "<group>";
-		};
-		4CA9DF9F2B048D930034B178 /* 1 */ = {
-			isa = PBXGroup;
-			children = (
-				4CA9DFA02B048D930034B178 /* Release */,
-			);
-			path = 1;
-			sourceTree = "<group>";
-		};
-		4CA9DFA02B048D930034B178 /* Release */ = {
-			isa = PBXGroup;
-			children = (
-				4CA9DFA12B048D930034B178 /* App.xcframework */,
-				4CA9DFA22B048D930034B178 /* Flutter.podspec */,
-			);
-			path = Release;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,7 +109,6 @@
 				4C1B78842A94B58800953E68 /* Frameworks */,
 				4C1B78852A94B58800953E68 /* Resources */,
 				67FC5377E8139C083097514F /* [CP] Embed Pods Frameworks */,
-				4CA9DF9B2B048CA90034B178 /* Embed Frameworks */,
 				437EE934E6A4094764E238A6 /* [CP-User] Embed Flutter Build flutter_car_price_calculator Script */,
 			);
 			buildRules = (
@@ -209,7 +159,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C1B78972A94B58900953E68 /* LaunchScreen.storyboard in Resources */,
-				4CA9DFAA2B048D930034B178 /* Flutter.podspec in Resources */,
 				4C1B78942A94B58900953E68 /* Assets.xcassets in Resources */,
 				4C1B78922A94B58800953E68 /* Main.storyboard in Resources */,
 			);
@@ -444,7 +393,6 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FMDB\"",
 					"\"${PODS_ROOT}/Flutter\"",
 					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flutter\"",
-					"$(PROJECT_DIR)/Framework/1/Release/",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JenkinsTest/Info.plist;
@@ -490,7 +438,6 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/FMDB\"",
 					"\"${PODS_ROOT}/Flutter\"",
 					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flutter\"",
-					"$(PROJECT_DIR)/Framework/1/Release/",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JenkinsTest/Info.plist;

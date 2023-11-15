@@ -28,9 +28,6 @@
   "dependencies": {
     "Flutter": [
 
-    ],
-    "image_picker_ios": [
-
     ]
   }
 }

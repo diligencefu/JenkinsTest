@@ -2,18 +2,14 @@ PODS:
   - Flutter (1.0.0)
   - FlutterPluginRegistrant (0.0.1):
     - Flutter
-    - image_picker_ios
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - image_picker_ios (0.0.1):
-    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `../flutter_car_price_calculator/.ios/Flutter`)
   - FlutterPluginRegistrant (from `../flutter_car_price_calculator/.ios/Flutter/FlutterPluginRegistrant`)
   - FMDB
-  - image_picker_ios (from `../flutter_car_price_calculator/.ios/.symlinks/plugins/image_picker_ios/ios`)
 
 SPEC REPOS:
   trunk:
@@ -24,14 +20,11 @@ EXTERNAL SOURCES:
     :path: "../flutter_car_price_calculator/.ios/Flutter"
   FlutterPluginRegistrant:
     :path: "../flutter_car_price_calculator/.ios/Flutter/FlutterPluginRegistrant"
-  image_picker_ios:
-    :path: "../flutter_car_price_calculator/.ios/.symlinks/plugins/image_picker_ios/ios"
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  FlutterPluginRegistrant: 5fc8395dbc2a8bc327db6292340f115c1566bdfd
+  FlutterPluginRegistrant: 58acfb6cb31ee4ca14f920aba101815efda113ee
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
 
 PODFILE CHECKSUM: a8a4cf40181b5fa8a3e422ffd93131a6c2eeb7a1
 
