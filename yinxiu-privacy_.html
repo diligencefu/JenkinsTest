@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>打开微信</title>
+</head>
+<body>
+  <button onclick="openWeChat()">打开微信</button>
+
+  <script>
+    function openWeChat() {
+      // 检查是否安装了微信
+      if (!window.wechat) {
+        alert("请先安装微信");
+        return;
+      }
+
+      // 生成微信分享链接
+      var shareLink = "https://www.example.com/share";
+
+      // 调用微信分享 API
+      window.wechat.share({
+        message: {
+          title: "标题",
+          description: "描述",
+          thumb: "缩略图 URL",
+          media: {
+            type: "webpage",
+             webpageUrl: shareLink
+          }
+        },
+        scene: window.wechat.Scene.SESSION   // 分享到好友
+      });
+    }
+  </script>
+</body>
+</html>
